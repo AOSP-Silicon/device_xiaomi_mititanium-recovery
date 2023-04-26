@@ -1,4 +1,4 @@
-# Common device tree for Xiaomi Thorium devices
+# Common device recovery tree for Xiaomi Titanium devices
 
 ```
 #
