@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-COMMON_PATH := device/xiaomi/mithorium-common
+COMMON_PATH := device/xiaomi/mititanium
 
 # Architecture
 TARGET_ARCH := arm64
@@ -64,7 +64,7 @@ TW_INCLUDE_RESETPROP := true
 TW_EXTRA_LANGUAGES := true
 
 # TWRP - Crypto
-ifeq ($(MITHORIUM_INCLUDE_CRYPTO),true)
+ifeq ($(MITITANIUM_INCLUDE_CRYPTO),true)
 TW_INCLUDE_CRYPTO := true
 
 PLATFORM_VERSION := 99.87.36
@@ -84,13 +84,13 @@ RECOVERY_LIBRARY_SOURCE_FILES += \
 endif
 
 # TWRP - Crypto - FBE
-ifeq ($(MITHORIUM_INCLUDE_CRYPTO_FBE),true)
+ifeq ($(MITITANIUM_INCLUDE_CRYPTO_FBE),true)
 BOARD_USES_QCOM_FBE_DECRYPTION := true
 TW_USE_FSCRYPT_POLICY := 1
 endif
 
 # TWRP - Crypto - FDE
-ifeq ($(MITHORIUM_INCLUDE_CRYPTO_FDE),true)
+ifeq ($(MITITANIUM_INCLUDE_CRYPTO_FDE),true)
 BOARD_USES_QCOM_DECRYPTION := true
 TARGET_CRYPTFS_HW_PATH := $(COMMON_PATH)/cryptfs_hw
 TARGET_HW_DISK_ENCRYPTION := true

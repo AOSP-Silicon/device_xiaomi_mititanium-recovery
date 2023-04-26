@@ -4,28 +4,28 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-TARGET_USES_XIAOMI_MITHORIUM_COMMON_TREE := true
+TARGET_USES_XIAOMI_TITANIUM_COMMON_TREE := true
 
 # Inherit AOSP product makefiles
 $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 
 # Crypto
-ifeq ($(MITHORIUM_INCLUDE_CRYPTO_FBE),true)
-MITHORIUM_INCLUDE_CRYPTO := true
+ifeq ($(MITITANIUM_INCLUDE_CRYPTO_FBE),true)
+MITITANIUM_INCLUDE_CRYPTO := true
 PRODUCT_PACKAGES += qcom_decrypt_fbe
 endif
-ifeq ($(MITHORIUM_INCLUDE_CRYPTO_FDE),true)
-MITHORIUM_INCLUDE_CRYPTO := true
+ifeq ($(MITITANIUM_INCLUDE_CRYPTO_FDE),true)
+MITITANIUM_INCLUDE_CRYPTO := true
 endif
-ifeq ($(MITHORIUM_INCLUDE_CRYPTO),true)
+ifeq ($(MITITANIUM_INCLUDE_CRYPTO),true)
 PRODUCT_PACKAGES += qcom_decrypt
-ifeq ($(MITHORIUM_LEGACY_CRYPTO),true)
-MITHORIUM_KEYMASTER_VERSION := 3.0
-else # MITHORIUM_LEGACY_CRYPTO
-MITHORIUM_KEYMASTER_VERSION ?= 4.0
-endif # MITHORIUM_LEGACY_CRYPTO
-endif # MITHORIUM_INCLUDE_CRYPTO
+ifeq ($(MITITANIUM_LEGACY_CRYPTO),true)
+MITITANIUM_KEYMASTER_VERSION := 3.0
+else # MITITANIUM_LEGACY_CRYPTO
+MITITANIUM_KEYMASTER_VERSION ?= 4.0
+endif # MITITANIUM_LEGACY_CRYPTO
+endif # MITITANIUM_INCLUDE_CRYPTO
 
 # Debug
 PRODUCT_PACKAGES += \
@@ -37,13 +37,13 @@ PRODUCT_COPY_FILES += \
     $(OUT_DIR)/target/product/$(PRODUCT_RELEASE_NAME)/system/apex/com.android.runtime/bin/crash_dump64:$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/crash_dump64
 
 # Fstab
-ifneq ($(MITHORIUM_USES_DEVICE_SPECIFIC_FSTAB),true)
+ifneq ($(MITITANIUM_USES_DEVICE_SPECIFIC_FSTAB),true)
 PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(LOCAL_PATH)/fstab/,$(TARGET_COPY_OUT_RECOVERY)/root/system/etc/)
 endif
 
 # Gatekeeper
-ifeq ($(MITHORIUM_LEGACY_CRYPTO),true)
-ifeq ($(MITHORIUM_INCLUDE_CRYPTO_FBE),true)
+ifeq ($(MITITANIUM_LEGACY_CRYPTO),true)
+ifeq ($(MITITANIUM_INCLUDE_CRYPTO_FBE),true)
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-impl \
     android.hardware.gatekeeper@1.0-service
@@ -55,7 +55,7 @@ endif
 endif
 
 # Keymaster
-ifeq ($(MITHORIUM_LEGACY_CRYPTO),true)
+ifeq ($(MITITANIUM_LEGACY_CRYPTO),true)
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl \
     android.hardware.keymaster@3.0-service
@@ -71,12 +71,12 @@ PRODUCT_PACKAGES += \
     charger_led
 
 # Proprietary - BEGIN
-ifneq ($(MITHORIUM_USES_DEVICE_SPECIFIC_BLOBS),true)
+ifneq ($(MITITANIUM_USES_DEVICE_SPECIFIC_BLOBS),true)
 
 # Proprietary - Gatekeeper
-ifeq ($(MITHORIUM_INCLUDE_CRYPTO),true)
-ifeq ($(MITHORIUM_LEGACY_CRYPTO),true)
-ifeq ($(MITHORIUM_INCLUDE_CRYPTO_FBE),true)
+ifeq ($(MITITANIUM_INCLUDE_CRYPTO),true)
+ifeq ($(MITITANIUM_LEGACY_CRYPTO),true)
+ifeq ($(MITITANIUM_INCLUDE_CRYPTO_FBE),true)
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/proprietary/gatekeeper/system/,$(TARGET_COPY_OUT_RECOVERY)/root/system/)
 endif
@@ -84,23 +84,23 @@ endif
 endif
 
 # Proprietary - Keystore
-ifeq ($(MITHORIUM_INCLUDE_CRYPTO),true)
-ifeq ($(MITHORIUM_LEGACY_CRYPTO),true)
+ifeq ($(MITITANIUM_INCLUDE_CRYPTO),true)
+ifeq ($(MITITANIUM_LEGACY_CRYPTO),true)
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/proprietary/keystore/system/,$(TARGET_COPY_OUT_RECOVERY)/root/system/)
 endif
 endif
 
 # Proprietary - QSEECOMd
-ifeq ($(MITHORIUM_INCLUDE_CRYPTO),true)
+ifeq ($(MITITANIUM_INCLUDE_CRYPTO),true)
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/proprietary/qseecomd/system/,$(TARGET_COPY_OUT_RECOVERY)/root/system/)
 endif
 
 # Proprietary - QTI Gatekeeper 1.0
-ifeq ($(MITHORIUM_INCLUDE_CRYPTO),true)
-ifneq ($(MITHORIUM_LEGACY_CRYPTO),true)
-ifeq ($(MITHORIUM_INCLUDE_CRYPTO_FBE),true)
+ifeq ($(MITITANIUM_INCLUDE_CRYPTO),true)
+ifneq ($(MITITANIUM_LEGACY_CRYPTO),true)
+ifeq ($(MITITANIUM_INCLUDE_CRYPTO_FBE),true)
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/proprietary/qti-gatekeeper-1-0/system/,$(TARGET_COPY_OUT_RECOVERY)/root/system/)
 endif
@@ -108,11 +108,11 @@ endif
 endif
 
 # Proprietary - QTI Keymaster
-ifeq ($(MITHORIUM_INCLUDE_CRYPTO),true)
-ifneq ($(MITHORIUM_LEGACY_CRYPTO),true)
+ifeq ($(MITITANIUM_INCLUDE_CRYPTO),true)
+ifneq ($(MITITANIUM_LEGACY_CRYPTO),true)
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/proprietary/qti-keymaster-common/system/,$(TARGET_COPY_OUT_RECOVERY)/root/system/)
-ifeq ($(MITHORIUM_KEYMASTER_VERSION),3.0)
+ifeq ($(MITITANIUM_KEYMASTER_VERSION),3.0)
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/proprietary/qti-keymaster-3-0/system/,$(TARGET_COPY_OUT_RECOVERY)/root/system/)
 else ifeq ($(MITHORIUM_KEYMASTER_VERSION),4.0)
@@ -126,10 +126,10 @@ endif
 endif # MITHORIUM_USES_DEVICE_SPECIFIC_BLOBS
 
 # Vintf - Keymaster
-ifeq ($(MITHORIUM_INCLUDE_CRYPTO),true)
-ifeq ($(MITHORIUM_KEYMASTER_VERSION),3.0)
+ifeq ($(MITITANIUM_INCLUDE_CRYPTO),true)
+ifeq ($(MITITANIUM_KEYMASTER_VERSION),3.0)
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/vintf/keymaster-3-0.xml:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/etc/vintf/manifest/keymaster-3-0.xml
-else ifeq ($(MITHORIUM_KEYMASTER_VERSION),4.0)
+else ifeq ($(MITITANIUM_KEYMASTER_VERSION),4.0)
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/vintf/keymaster-4-0.xml:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/etc/vintf/manifest/keymaster-4-0.xml
 endif
 endif
