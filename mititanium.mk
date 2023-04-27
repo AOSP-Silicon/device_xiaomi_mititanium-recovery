@@ -10,6 +10,8 @@ TARGET_USES_XIAOMI_MITITANIUM_COMMON_TREE := true
 $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 
+ALLOW_MISSING_DEPENDENCIES := true
+
 # Crypto
 ifeq ($(MITITANIUM_INCLUDE_CRYPTO_FBE),true)
 MITITANIUM_INCLUDE_CRYPTO := true
